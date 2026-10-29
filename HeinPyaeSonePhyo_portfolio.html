@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Hein Pyae Sone Phyo — Software Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8FAF9;
+    --bg-alt: #EEF3F0;
+    --text: #10201A;
+    --text-muted: #4B5F57;
+    --text-faint: #80928B;
+    --accent: #166A4C;
+    --accent-soft: #E1F1E9;
+    --accent-glow: rgba(22,106,76,0.10);
+    --on-accent: #FFFFFF;
+    --border: #DCE5E0;
+    --font-head: 'Manrope', 'Inter', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  :root[data-theme="light"] {
+    --bg: #F8FAF9;
+    --bg-alt: #EEF3F0;
+    --text: #10201A;
+    --text-muted: #4B5F57;
+    --text-faint: #80928B;
+    --accent: #166A4C;
+    --accent-soft: #E1F1E9;
+    --accent-glow: rgba(22,106,76,0.10);
+    --on-accent: #FFFFFF;
+    --border: #DCE5E0;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F172A;
+    --bg-alt: #172033;
+    --text: #E5E9F0;
+    --text-muted: #9AA6BA;
+    --text-faint: #67748B;
+    --accent: #7CA3F5;
+    --accent-soft: #1E2A4A;
+    --accent-glow: rgba(124,163,245,0.14);
+    --on-accent: #0B1226;
+    --border: #24304A;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(64px + env(safe-area-inset-top,0px)); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ::selection { background: var(--accent-soft); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .page { max-width: 840px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---- top nav ---- */
+  .nav {
+    position: sticky; top: env(safe-area-inset-top,0px); z-index: 30;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner {
+    max-width: 840px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .nav-name { font-family: var(--font-head); font-weight: 700; font-size: 15px; }
+  .nav-links { display: flex; gap: 20px; overflow-x: auto; }
+  .nav-links a { color: var(--text-muted); font-size: 13.5px; white-space: nowrap; }
+  .nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+  /* ---- header ---- */
+  header.hero { padding: 56px 0 40px; }
+  header.hero h1 {
+    font-family: var(--font-head);
+    font-weight: 800;
+    font-size: 34px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  header.hero .title {
+    font-family: var(--font-head);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--accent);
+    margin: 0 0 16px;
+  }
+  .contact-line {
+    display: flex; flex-wrap: wrap; gap: 6px 0;
+    font-size: 13.5px; color: var(--text-muted);
+  }
+  .contact-line span { display: flex; align-items: center; }
+  .contact-line .sep { margin: 0 10px; color: var(--text-faint); }
+  .contact-line a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 4px;
+}
+
+.contact-line a:hover {
+  color: var(--text);
+  text-decoration-color: var(--accent);
+} a:hover { color: var(--accent); }
+
+  .hero-actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13.5px;
+    padding: 9px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: inline-block;
+  }
+  .btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .btn.primary:hover { opacity: 0.9; text-decoration: none; }
+  .btn:not(.primary) { color: var(--text); }
+  .btn:not(.primary):hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  /* ---- section header bar (echoes CV styling) ---- */
+  section { padding: 6px 0 44px; }
+  .bar {
+    background: var(--bg-alt);
+    border-radius: 8px;
+    padding: 9px 16px;
+    margin-bottom: 22px;
+  }
+  .bar h2 {
+    font-family: var(--font-head);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: var(--text);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  p.summary { color: var(--text-muted); max-width: 68ch; font-size: 15px; }
+
+  /* ---- experience entries: card grid ---- */
+  .entry-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .entry {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    background: var(--bg);
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .entry:hover { border-color: var(--accent); box-shadow: 0 2px 10px var(--accent-glow); }
+  .entry-head {
+    display: flex; flex-direction: column; gap: 2px;
+    margin-bottom: 2px;
+  }
+  .entry-head h3 { font-family: var(--font-head); font-size: 16px; font-weight: 700; margin: 0; }
+  .entry-head .meta { font-size: 11.5px; color: var(--text-faint); font-family: var(--font-body); }
+  .entry-role { font-size: 13px; color: var(--accent); font-weight: 600; margin: 6px 0 8px; }
+  .entry-tech { display: flex; flex-wrap: wrap; gap: 5px; margin: 0 0 12px; }
+  .entry-tech span { font-size: 11px; padding: 3px 8px; border-radius: 5px; background: var(--bg-alt); color: var(--text-muted); border: 1px solid var(--border); }
+  .entry ul { margin: 0; padding-left: 18px; color: var(--text-muted); }
+  .entry ul li { margin-bottom: 6px; font-size: 13.5px; }
+  .entry ul li::marker { color: var(--accent); }
+
+  /* ---- additional projects: card grid ---- */
+  .proj-compact { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .proj-row {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .proj-row:hover { border-color: var(--accent); box-shadow: 0 2px 10px var(--accent-glow); }
+  .proj-row .p-title { display: block; font-family: var(--font-head); font-weight: 700; font-size: 14.5px; }
+  .proj-row .p-tag { display: block; font-size: 11px; color: var(--accent); font-weight: 600; margin-top: 4px; }
+  .proj-row .p-desc { font-size: 13.5px; color: var(--text-muted); margin: 10px 0 0; }
+
+  /* ---- skills ---- */
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 32px; }
+  .skill-group h4 {
+    font-family: var(--font-head); font-size: 13px; font-weight: 700;
+    margin: 0 0 10px; color: var(--text);
+  }
+  .skill-group .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-group .tags span {
+    font-size: 12.5px; padding: 5px 10px; border-radius: 5px;
+    background: var(--bg-alt); color: var(--text-muted); border: 1px solid var(--border);
+  }
+
+  /* ---- education ---- */
+  .edu-entry { margin-bottom: 22px; }
+  .edu-entry:last-child { margin-bottom: 0; }
+  .edu-entry h3 { font-family: var(--font-head); font-size: 16px; font-weight: 700; margin: 0 0 2px; }
+  .edu-entry .prog { font-size: 13.5px; color: var(--accent); font-weight: 600; margin: 0 0 8px; }
+  .edu-entry .modules { font-size: 13.5px; color: var(--text-muted); margin: 0; }
+  .edu-entry .modules span { color: var(--text); }
+
+  /* ---- additional info ---- */
+  .info-list { margin: 0; padding-left: 19px; color: var(--text-muted); }
+  .info-list li { margin-bottom: 8px; font-size: 14.5px; }
+  .info-list li::marker { color: var(--accent); }
+
+  footer.foot {
+    border-top: 1px solid var(--border);
+    padding: 28px 0 48px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  footer.foot .links { display: flex; gap: 18px; font-size: 13.5px; }
+  footer.foot .copy { font-size: 12.5px; color: var(--text-faint); }
+
+
+  /* ---- restrained green accents ---- */
+  .bar { background: var(--bg-alt); border-radius: 6px; }
+  .bar h2 { color: var(--accent); }
+  .btn:not(.primary) { border-color: var(--border); color: var(--text); }
+  .btn:not(.primary):hover { border-color: var(--accent); color: var(--accent); }
+
+  @media (max-width: 640px) {
+    header.hero h1 { font-size: 27px; }
+    .nav-links { gap: 14px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .entry-grid { grid-template-columns: 1fr; }
+    .proj-compact { grid-template-columns: 1fr; }
+    .entry-head { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-inner">
+    <nav class="nav-links">
+      <a href="#summary">Summary</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<div class="page">
+
+  <header class="hero">
+    <h1>Hein Pyae Sone Phyo</h1>
+    <p class="title">Graduate Software Engineer · Junior Developer</p>
+    <div class="contact-line">
+      <span>Hatfield, UK</span><span class="sep">·</span>
+      <span><a href="mailto:heinpyaesonephyo2004@gmail.com">Email</a></span><span class="sep">·</span>
+      <span><a href="https://www.linkedin.com/in/hein-pyae-sone-phyo-0a9527384" target="_blank" rel="noopener">LinkedIn</a></span><span class="sep">·</span>
+      <span><a href="https://github.com/HeinPyaeSonePhyo" target="_blank" rel="noopener">GitHub</a></span>
+    </div>
+    <div class="hero-actions">
+      <a class="btn primary"
+   href="HeinPyaeSonePhyo_CV.pdf"
+   download="Hein-Pyae-Sone-Phyo-CV.pdf">
+  Download CV 
+</a>
+      <a class="btn" href="https://github.com/HeinPyaeSonePhyo" target="_blank" rel="noopener">View GitHub</a>
+    </div>
+  </header>
+
+  <section id="summary">
+    <div class="bar"><h2>Summary</h2></div>
+    <p class="summary">Computer Science &amp; IT graduate from the University of Hertfordshire with hands-on experience across full-stack web development, mobile applications, machine learning and database-driven systems. Comfortable working in PHP, Java, Python, C/C++, JavaScript and React Native, with additional coursework in IoT, embedded and real-time systems. Familiar with Agile workflows and collaborative development using Git/GitHub, and eligible to work in the UK under Graduate Visa status.</p>
+  </section>
+
+  <section id="experience">
+    <div class="bar"><h2>Experience</h2></div>
+
+    <div class="entry-grid">
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Weillo — Health Tracker</h3>
+        </div>
+        <p class="entry-role">Full-Stack Healthcare Management Platform</p>
+        <div class="entry-tech"><span>PHP</span><span>JavaScript</span><span>MySQL</span></div>
+        <ul>
+          <li>Session-based auth, appointment booking/cancellation and health-record logging via Auth/Appointment/Entry controllers.</li>
+          <li>"Ask Weillo" assistant page calling the OpenAI API, with an offline demo mode when no key is set.</li>
+          <li>MVC-style structure separating pages, controllers and the MySQL layer.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Robodent — Dental Management System</h3>
+        </div>
+        <p class="entry-role">Healthcare Appointment &amp; Management System</p>
+        <div class="entry-tech"><span>PHP</span><span>MySQL</span><span>JavaScript</span></div>
+        <ul>
+          <li>Separate admin portal (schedules, treatments, patient records, image uploads) and patient portal (signup/login, booking, profile).</li>
+          <li>Designed to cut admin overhead for clinics across scheduling and patient data.</li>
+          <li>Shared relational schema and backend controllers across both portals.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Parkinson's Diagnosis System — Machine Learning &amp; Neural Computing</h3>
+        </div>
+        <p class="entry-role">PCA + SVM Classification</p>
+        <div class="entry-tech"><span>Python</span><span>scikit-learn</span><span>PCA</span><span>SVM</span></div>
+        <ul>
+          <li>Classified Parkinson's from 22 voice-measurement features, split into HighHNR/LowHNR groups.</li>
+          <li>PCA's first two components explained ~72% of variance; tuned RBF-SVMs across several C/γ values.</li>
+          <li>100% validation accuracy but 61–81% on test data — a clear lesson in class-imbalance pitfalls.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Calorix — Mobile App</h3>
+        </div>
+        <p class="entry-role">Mobile Health &amp; Nutrition Tracking</p>
+        <div class="entry-tech"><span>React Native</span><span>Expo</span><span>JavaScript</span></div>
+        <ul>
+          <li>Eight-screen app: Splash, Dashboard, Log Day, Food Library, Food Detail, Add Food, Favourites, Profile.</li>
+          <li>Food logging, dashboard summary and favourites, with local storage for offline persistence.</li>
+          <li>Component-based architecture, built and tested through Expo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="bar"><h2>Additional Projects</h2></div>
+    <div class="proj-compact">
+
+      <div class="proj-row">
+        <span class="p-title">Healthcare Management System</span><span class="p-tag">Software Architecture · UML + Java Swing</span>
+        <p class="p-desc">UML design (use-case, class, 3-tier component diagrams) implemented as a working Java Swing desktop app managing patients, staff and referrals.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">LoRa IIoT Monitoring Network</span><span class="p-tag">Internet of Things</span>
+        <p class="p-desc">Two Arduino MKR WAN 1310 nodes over 868MHz LoRaWAN — a button-triggered node and a DHT22 sensor node — with encrypted messaging and a SCADA vs. IIoT comparison.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">Initio — Vision-Guided Vehicle</span><span class="p-tag">Embedded Systems · C, group project</span>
+        <p class="p-desc">A Raspberry-Pi robot that finds and approaches a red target via camera blob detection, with IR/ultrasonic sensors and motor control in C.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">Line-Following Robot</span><span class="p-tag">Real-Time Systems</span>
+        <p class="p-desc">A C control loop reading line sensors and adjusting motors continuously, built around real-time timing constraints.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">Inventory Management System</span><span class="p-tag">C++ · OOP</span>
+        <p class="p-desc">Console app with a base <em>Product</em> class and virtual functions, a derived <em>AddProduct</em> class, and file-based record storage.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">Smart Home Pte Ltd — Client System</span><span class="p-tag">Java · MySQL</span>
+        <p class="p-desc">Java desktop app with login/sign-up and full CRUD for client and item records, backed by MySQL.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">AeroTechDB</span><span class="p-tag">SQL · Database Design</span>
+        <p class="p-desc">Relational database for aircraft maintenance, with queries joining airworthiness-test and aeroplane records by date range.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">Club &amp; Society Portal</span><span class="p-tag">PHP · MySQL</span>
+        <p class="p-desc">Club browsing and registration site with a JS homepage slideshow and an admin login to manage registrations.</p>
+      </div>
+
+      <div class="proj-row">
+        <span class="p-title">Gather — Social Wellness App</span><span class="p-tag">Group project · 6-person team</span>
+        <p class="p-desc">Contributed to concept and feature scoping for a social wellness app, from pitch through to a working feature set.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="bar"><h2>Technical Skills</h2></div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Programming</h4>
+        <div class="tags"><span>PHP</span><span>Java</span><span>Python</span><span>C++</span><span>C#</span><span>React Native</span></div>
+      </div>
+      <div class="skill-group">
+        <h4>Web Development</h4>
+        <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+      </div>
+      <div class="skill-group">
+        <h4>Databases</h4>
+        <div class="tags"><span>MySQL</span><span>SQL</span><span>Database Design</span><span>phpMyAdmin</span></div>
+      </div>
+      <div class="skill-group">
+        <h4>Software Engineering &amp; Systems</h4>
+        <div class="tags"><span>Software Architecture</span><span>CRUD Applications</span><span>OOP</span><span>Git &amp; GitHub</span><span>Networking</span><span>Linux / Ubuntu</span><span>Expo.dev</span><span>Android Studio</span><span>Machine Learning</span><span>IoT Systems</span><span>Embedded Systems</span><span>Real-time Systems</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="bar"><h2>Education</h2></div>
+
+    <div class="edu-entry">
+      <h3>University of Hertfordshire</h3>
+      <p class="prog">BSc (Hons) Computer Science &amp; Information Technology</p>
+      <p class="modules">Relevant modules: <span>Software Architecture, Machine Learning, Neural Computing, Responsible Computing, Real-time Systems, Internet of Things, Mobile Computing</span></p>
+    </div>
+
+    <div class="edu-entry">
+      <h3>TMC Academy</h3>
+      <p class="prog">Higher National Diploma (HND) — Infocomm Technology</p>
+      <p class="modules">Relevant modules: <span>Database Systems &amp; Applications, Application Programming with Java, Web Programming &amp; Applications, Development of Mobile Applications, Object-Oriented Programming with C++, Cloud Computing Concepts, Information Systems Analysis &amp; Design, Network Operating Systems, Project Management</span></p>
+    </div>
+  </section>
+
+  <section id="additional">
+    <div class="bar"><h2>Additional Information</h2></div>
+    <ul class="info-list">
+      <li>Eligible to work in the United Kingdom under Graduate Visa status.</li>
+      <li>Strong academic background across software engineering, full-stack development, databases and mobile applications.</li>
+      <li>Experienced developing web, desktop and mobile applications through university and personal projects.</li>
+      <li>Familiar with Agile development methodologies, collaborative workflows, Git/GitHub version control and iterative development practices.</li>
+      <li>Passionate about learning modern technologies and building practical, real-world systems.</li>
+    </ul>
+  </section>
+
+  <footer class="foot" id="contact">
+    <div class="links">
+      <a href="mailto:heinpyaesonephyo2004@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/hein-pyae-sone-phyo-0a9527384" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/HeinPyaeSonePhyo" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="copy">© <span id="year"></span> Hein Pyae Sone Phyo</div>
+  </footer>
+
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
